@@ -1,5 +1,7 @@
 # 🧠 Jarvis Voice Assistant
 
+MY 1st PYTHON PROJECT
+
 A simple Python-based voice assistant inspired by J.A.R.V.I.S. from Iron Man. It can recognize voice commands and perform tasks like:
 
 - Greeting based on the time of day
