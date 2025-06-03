@@ -7,6 +7,7 @@ import webbrowser as wb
 import requests
 import langdetect
 import os
+import geocoder
 
 
 engine = pyttsx3.init()
@@ -122,6 +123,29 @@ def News(api = "pub_c831d8caad554c61bb14a241bab4941d"):
 
 
 
+def Weather():
+    location = geocoder.ip('me')
+    api = "ebee924c32e64878b33131408250306"
+    loc = location.latlng
+    url = f"http://api.weatherapi.com/v1/current.json?key={api}&q={loc[0]},{loc[1]}"
+    
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        Speak("The current weather is as follows \n" \
+        f"the current temperature is {data['current']['temp_c']} degree celcius")
+        Speak(f"with wind speed of {data['current']['wind_kph']} kilometer per hour")
+        Speak(f"and the condition is {data['current']['condition']['text']}")
+        
+
+
+
+
+
+
+
+
 
 def main():
 
@@ -143,6 +167,8 @@ def main():
             elif "date" in query: Speak(Date())
             
             elif "time" in query: Speak(Time())
+
+            elif "weather" in query or "temperature" in query : Weather()
 
             elif "exit" in query or "quit" in query :
                 Speak("Good bye")
